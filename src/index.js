@@ -84,11 +84,29 @@ app.put('/todos/:id', checksExistsUserAccount, (request, response) => {
 });
 
 app.patch('/todos/:id/done', checksExistsUserAccount, (request, response) => {
-  // Complete aqui
+  const { user } = request;
+  const { id } = request.params;
+  const todo = user.todos.find(todo => {
+    if (todo.id === id) {
+      todo.done = true;
+      return todo;
+    }
+  });
+  if (!todo) {
+    response.status(404).json({ error: "Todo not found with this id"})
+  }
+  response.status(200).send(todo);
 });
 
 app.delete('/todos/:id', checksExistsUserAccount, (request, response) => {
-  // Complete aqui
+  const { user } = request;
+  const { id } = request.params;
+  const todo = user.todos.find(todo => todo.id === id);
+  if (!todo) {
+    response.status(404).json({ error: "Todo not found with this id"})
+  }
+  user.todos.splice(todo, 1);
+  response.status(204).send();
 });
 
 module.exports = app;
