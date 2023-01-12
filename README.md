@@ -34,7 +34,8 @@ After send the data you should receive an data object like:
 In this route you must send in header request the username created before.
 If you use **Insomnia** it would be like this:
 ![Screenshot 2023-01-11 at 19 29 32](https://user-images.githubusercontent.com/78756748/211931726-ce10b99a-3f5c-4d51-8dac-42ec2eee202f.png)
-With this you must receive all user todos.
+<br>
+To delete a todo you must provide `username` and the todo's id
 
 ### POST `/todos`
 To create todos you must send in body request `title`, `deadline` and `username`. This last you need to send in header request.
